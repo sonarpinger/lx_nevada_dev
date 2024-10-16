@@ -1,0 +1,10 @@
+- name: Install packages
+  tags:
+    - install_packages
+  apt:
+    package:
+      - gedit
+      - vim
+      - git-all
+    state: present
+    update_cache: yes

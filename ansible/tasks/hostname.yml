@@ -1,0 +1,6 @@
+- name: Hostname
+  tags:
+    - hostname
+  command: cat /etc/hostname
+  #register: hostname
+  #debug: var=hostname.stdout_lines

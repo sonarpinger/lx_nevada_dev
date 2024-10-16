@@ -1,0 +1,5 @@
+
+- name: Soft link log files
+  tags:
+    - log_null
+  shell: ln -sf /dev/null /home/{{ username }}/.vnc/*.log

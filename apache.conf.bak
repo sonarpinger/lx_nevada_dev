@@ -1,0 +1,47 @@
+  #Logvar: %u - Remote User, OIDC sub
+  LogFormat "%h %l %{OIDC_CLAIM_preferred_username}e  %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" lxcombined
+
+  ErrorLog ${APACHE_LOG_DIR}/lx-error.log
+  CustomLog ${APACHE_LOG_DIR}/lx-access.log lxcombined
+
+  <Proxy "*">
+    Header set X-OIDC-USERNAME "%{OIDC_CLAIM_preferred_username}e"
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+  </Proxy>
+
+  LogLevel info auth_openidc:info
+
+  OIDCCacheType file
+  OIDCSessionMaxDuration 86400
+  OIDCSessionInactivityTimeout 86400
+  OIDCUserInfoRefreshInterval 300
+  OIDCRefreshAccessTokenBeforeExpiry 300
+
+  OIDCProviderMetadataURL 
+  OIDCClientID 
+  OIDCClientSecret 
+
+  # OIDCRedirectURI is a vanity URL that must point to a path protected by this module
+  # but must NOT point to any content
+  OIDCRedirectURI https://lx.ncr.cse.unr.edu/oidc/callback
+  OIDCCryptoPassphrase 
+  OIDCOAuthRemoteUserClaim preferred_username
+  RewriteEngine On
+
+  <Location /oidc/>
+    AuthType openid-connect
+    Require valid-user
+  </Location>
+
+  Include /etc/apache2/sites-enabled/conf/*.conf
+
+  ProxyPass / http://127.0.0.1:7000/
+  ProxyPassReverse / http://127.0.0.1:7000/
+
+  RewriteCond %{HTTP:Connection} Upgrade [NC]
+  RewriteCond %{HTTP:Upgrade} websocket [NC]
+  RewriteRule /(.*) ws://127.0.0.1:8001/$1 [P,L]
+
+  RewriteCond %{HTTP:Upgrade} !=websocket [NC]
+  RewriteRule /(.*) http://127.0.0.1:8001/$1 [P,L]

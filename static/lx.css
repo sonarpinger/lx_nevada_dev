@@ -1,0 +1,306 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+div.layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    height: 90%
+}
+@media screen and (max-width: 900px) {
+    div.layout {
+        grid-template-columns: 1fr 16fr 1fr;
+        grid-template-rows: 1fr;
+    }
+    div.entry {
+        width: 100%;
+    }
+    div.computer {
+        width: 100%;
+    }
+
+}
+div.header {
+    grid-area: 1 / 2 / 2 / 3;
+}
+.nav{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    color: #5172df;
+    border-radius: 3px;
+}
+
+.nav a {
+    color: #2852da;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+code {
+    font-weight: 500;
+}
+
+.nav a:hover {
+    color: #fff;
+}
+
+div.child {
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    color: #fff;
+    /* padding: 25px; */
+}
+div.entry {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 2fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+    width: 100%;
+    margin-top: 5px;
+    border: 3px solid #2852da;
+    border-radius: 10px;
+    padding: 5px;
+
+    @media screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+    }
+}
+
+div.entry .header {
+    grid-area: 1 / 1 / 2 / 6;
+    display: flex;
+    padding: 5px;
+    padding-left: 10px;
+    justify-content: start;
+    align-items: center;
+    font-size: 22px;
+    /* font-weight: 500; */
+
+    @media screen and (max-width: 900px) {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+div.entry .header h3 {
+    margin: 0;
+}
+
+div.entry .controls {
+    grid-area: 2 / 1 / 3 / 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+        width: max-content;
+    }
+}
+
+div.entry .controls button {
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #0f1011;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+div.entry .controls button:hover {
+    background-color: darkgrey;
+    color: #000;
+}
+
+div.entry .services {
+    grid-area: 2 / 3 / 3 / 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 5px;
+    
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+        padding-left: 10px;
+        padding-right: 10px;
+        row-gap: 5px;
+    }
+}
+
+div.entry .services h2 {
+    margin: 0;
+}
+
+div.entry .services .service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    min-width: 60px;
+}
+
+div.entry .services .service:hover {
+    transition: all 0.3s;
+    background-color: #0f1011;
+    color: #fff;
+}
+
+div.entry .services .service h4 {
+    margin: 0;
+}
+
+div.entry .services .service a {
+    color: #2852da;
+    font-size: 16px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.manager-button {
+    color: #2852da;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #2852da;
+    border-radius: 2px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.manager-button:hover {
+    background-color: rgb(190, 187, 187);
+}
+
+.manager-button:active {
+    transform: scale(0.95);
+    transition: all 0.1s;
+}
+
+.manager-button.start{
+    color: #56b13f;
+}
+
+.manager-button.stop{
+    color: #ff0000;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.dropdown-button {
+    background-color: #2852da;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.dropdown-button:hover, .dropdown-button:focus {
+    background-color: #344a92;
+}
+
+.dropdown-content {
+    display: none;
+    min-width: 160px;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.25);
+    display: none;
+    z-index: 2;
+}
+
+.online {
+    color: #56b13f;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.offline {
+    color: #ff0000;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+div.entry .services .service.inactive {
+    opacity: 0.5;
+    border: 1px solid #ff0000;
+}
+
+code {
+    font-weight: 700;
+    font-family: monospace;
+    background-color: transparent;
+}
+
+.show{
+    display: flex;
+}
+
+.footer {
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 5px;
+}

@@ -1,0 +1,9 @@
+- name: Create zoom_desktop variable and set to false
+  tags:
+    - disable_zoom
+  shell: "xfconf-query --create --type bool --set false --channel xfwm4 --property /general/zoom_desktop"
+
+- name: Set existing zoom_desktop variable to false
+  tags:
+    - disable_zoom
+  shell: xfconf-query --set false --channel xfwm4 --property /general/zoom_desktop

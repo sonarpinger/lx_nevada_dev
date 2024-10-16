@@ -1,0 +1,23 @@
+- name: Get current user
+  tags:
+    - log_size
+  shell: "getent passwd | tail -n 1 | awk -F : '{print $1}'"
+  register: user
+
+- name: Get log size
+  tags:
+    - log_size
+  shell: du -k /home/{{ user.stdout }}/.vnc/*.log | awk '{print $1}' | head -n 1
+  register: log_size
+
+- name: Print log size
+  tags:
+    - log_size
+  debug:
+    var: log_size.stdout_lines
+
+- name: Delete log files if greater than 100000 kilobytes (100MB)
+  tags:
+    - log_size
+  shell: truncate -s 0 /home/{{ user.stdout }}/.vnc/*.log
+  when: log_size.stdout_lines[0] | int > 100000

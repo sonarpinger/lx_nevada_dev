@@ -1,0 +1,38 @@
+---
+- name: LX Tasks
+  hosts: all
+  # remote-user: root
+  vars:
+    username: "{{ inventory_hostname.split('-')[1] }}"
+  tasks:
+    - name: hostname
+      include_tasks: tasks/hostname.yml
+      tags:
+        - never
+        - hostname
+    - name: log_size
+      include_tasks: tasks/log_size.yml
+      tags:
+        - never
+        - log_size
+    - name: install gedit
+      include_tasks: tasks/install_packages.yml
+      tags:
+        - never
+        - install_packages
+    - name: disable xfce4 zoom
+      include_tasks: tasks/disable_xfce4_zoom.yml
+      tags:
+        - never
+        - disable_zoom
+    - name: Softlink logs to /dev/null
+      include_tasks: tasks/log_null.yml
+      tags:
+        - never
+        - log_null
+    - name: Setup SNMP for monitoring
+      include_tasks: tasks/setup_snmp.yml
+      tags:
+        - never
+        - setup_snmp
+
